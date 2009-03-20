@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>index</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Jan Krutisch">
+	<!-- Date: 2009-03-19 -->
+	<script type="text/javascript" charset="utf-8">
+	 
+	 function initDB() {
+	   if(!openDatabase) return false
+	   
+  	 var db = openDatabase("mooves", "0.1", "The Mooves App", 1048576);
+  	 
+  	 if(db) {
+  	   db.transaction(function(tx) {
+    	   tx.executeSql('CREATE TABLE IF NOT EXISTS mooves(title VARCHAR(100), data TEXT)', []);  	     
+  	   })
+  	   return db
+  	 }
+  	 return false
+	 }
+
+   function updateDisplay() {
+  	 var db = initDB();
+  	 if(db) {
+       var mooves = document.getElementById('mooves');
+       db.transaction( function(tx) {
+         tx.executeSql('SELECT * FROM mooves', [], function(tx, rs) {
+           for(var i = 0; i < rs.rows.length; i++) {
+             mooves.innerHTML += "<li>" + rs.rows.item(i)['title'] + "</li>"  
+           }
+         })
+     
+       })	   
+  	 }     
+   }
+   
+	 
+	 
+	 
+	 
+	</script>
+</head>
+<body onload="updateDisplay();">
+  <ul id="mooves"></ul>
+</body>
+</html>
