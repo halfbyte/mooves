@@ -10,8 +10,11 @@
 	 #board { width: 600px; height:400px; border:1px solid black;
 	   background: brown url(images/basketball_field_eur.png) top left no-repeat;
 	   }
-	 ul.toolbar { display:block; list-style-type:none; margin:0; padding:0; }
-	 ul.toolbar li {display:inline;}
+	 ul#toolbar { display:block; list-style-type:none; margin:0; padding:0; }
+	 ul#toolbar li {display:inline;}
+	 ul#toolbar li a.active {
+	   background:yellow;
+	 }
 	</style>
 	
 	<script type="text/javascript" charset="utf-8" src="javascripts/jquery.js"></script>
@@ -22,9 +25,10 @@
 <body>
 <h1>Tactics Board</h1>
 <div>
-<ul class="toolbar">
+<ul id="toolbar">
   <li><a href="#" id="tool-move">Move</a></li>
   <li><a href="#" id="tool-turn">Turn</a></li>
+  <li><a href="#" id="tool-arrow">Paint Arrow</a></li>
 </ul>
 </div>
   <canvas id="board" width="600" height="400">Kannix</canvas>
