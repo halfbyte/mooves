@@ -12,6 +12,13 @@
 	 ul#toolbar li a.active {
 	   background:yellow;
 	 }
+	 
+	 #footer {
+	   border-top: 1px solid black;
+	   margin-top:20px;
+	 }
+	 
+	 
 	</style>
 	
 	<script type="text/javascript" charset="utf-8" src="javascripts/jquery.js"></script>
@@ -22,14 +29,19 @@
 <body>
 <h1>Tactics Board</h1>
 <div>
-<ul id="toolbar">
-  <li><a href="#" id="tool-move">Move</a></li>
-  <li><a href="#" id="tool-turn">Turn</a></li>
-  <li><a href="#" id="tool-arrow">Paint Arrow</a></li>
-</ul>
 </div>
+<div>
   <canvas id="board" width="600" height="400">Kannix</canvas>
+</div>
+<h2>Help</h2>
+<p>Use Mouse to move players. Hold "ALT" to Turn players. Klick, hold and draw on empty space to create arrows. Klick on Arrow's ends to edit arrows.</p>
+
+<p>Currently should work in any browser that understands the canvas element (rules out IE, at least for now).</p>
+<div id="footer">
+  This is a jan.krutisch.de/pixelpoke experiment. expect nothing.
+</div>
 
 
+<a href="http://github.com/halfbyte/mooves"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 </body>
 </html>

@@ -2,8 +2,6 @@ h1. mooves - the virtual tactics board for ball games
 
 h2. TODOS
 
-- Arrowheads
-- Arrows editable
-- Multiple Steps/Stages
-- Adding Players, Balls, Cones, whatever
-- Real Toolbar icons
+* Multiple Steps/Stages
+* Adding Players, Balls, Cones, whatever
+* Real Toolbar icons

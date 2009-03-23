@@ -50,22 +50,7 @@ var board = {
     }
     
     
-    $('ul#toolbar li #tool-move').click(function(e) {
-      self.tool = 'move'
-      self.setToolbar('move');
-      return(false);
-    })
-    $('#tool-turn').click(function(e) {      
-      self.tool = 'turn'
-      self.setToolbar('turn');
-      return(false);
-    })
-    $('#tool-arrow').click(function(e) {      
-      self.tool = 'arrow'
-      self.setToolbar('arrow');
-      return(false);
-    })
-    self.setToolbar('move');
+    
     window.setTimeout('board.checkLoadStatus();', 50)
   },
   
@@ -75,7 +60,6 @@ var board = {
     $(window).keydown(function(event){
       if (event.keyCode == 18) {
         self.tool = 'turn';
-        self.setToolbar('turn');
       }
         
       
@@ -84,7 +68,6 @@ var board = {
     $(window).keyup(function(event){
       if (event.keyCode == 18) {
         self.tool = 'move'
-        self.setToolbar('move');
       }
       
     });
@@ -223,10 +206,6 @@ var board = {
     
   },
   
-  setToolbar: function (tool) {
-    $('ul#toolbar li a').removeClass('active')
-    $('a#tool-' + tool).addClass('active')
-  },
   draw: function() {
     //var canvas = $('#board')[0]
     var ctx = this.context
