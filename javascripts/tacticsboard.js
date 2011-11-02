@@ -19,6 +19,11 @@ function Arrow(x,y,xEnd, yEnd) {
   this.hoverEnd = false
   this.boundStart = false
   this.boundEnd = false
+  this.hover = false
+  this.bound = false
+  this.yBound = 0
+  this.xBound = 0
+  
 }
 
 var board = {
@@ -135,7 +140,7 @@ var board = {
               arrow.y = y 
             } else if (arrow.boundEnd) {
               arrow.xEnd = x
-              arrow.yEnd = y               
+              arrow.yEnd = y             
             } else {
               if (self.isInBounds(x,y,arrow.x,arrow.y,5)) {
                 arrow.hoverStart = true
@@ -147,6 +152,30 @@ var board = {
               } else {
                 arrow.hoverEnd = false
               }
+              
+              var steigung = (arrow.yEnd - arrow.y) / (arrow.xEnd - arrow.x)
+              var targetY = (x - arrow.x) * steigung + arrow.y
+              console.log("s: " + steigung)
+              console.log("t: " + targetY)
+              console.log("r: " + y)
+              if (
+                  (
+                    (Math.abs(steigung) == Infinity) ||
+                    (Math.abs(targetY - y) < 5)
+                  ) &&                  
+                  (x > Math.min(arrow.x, arrow.xEnd)-3) && (x < Math.max(arrow.x, arrow.xEnd)+3) &&
+                  (y >= Math.min(arrow.y, arrow.yEnd)-3) && (y <= Math.max(arrow.y, arrow.yEnd)+3)
+              ) {
+                arrow.hover = true
+                // console.log("steigung mouse: " + ((x - arrow.x) / (y - arrow.y)))
+                // console.log("steigung arrow: " + ((arrow.xEnd - arrow.x) / (arrow.yEnd - arrow.y)))
+              } else {
+                arrow.hover = false
+                // console.log((arrow.xEnd - arrow.xStart) / (arrow.yEnd - arrow.yStart))
+              }
+                
+    
+              
             }
           })
         }
@@ -181,7 +210,7 @@ var board = {
             if (arrow.hoverEnd) {
               arrow.boundEnd = true
               anyArrowBound = true
-            }            
+            }       
           }
         })
         if (!anyArrowBound) {
@@ -211,13 +240,18 @@ var board = {
     var ctx = this.context
     var self = this
     //ctx.globalCompositeOperation = 'destination-over';
-    ctx.clearRect(0,0,600,400); // clear canvas
+    ctx.clearRect(0,0,700,410); // clear canvas
     jQuery.each(self.arrows, function(i,arrow) {
       ctx.save();
         ctx.lineWidth = 4
         if (arrow.finished) {
-          ctx.strokeStyle = '#ffffff'
-          ctx.fillStyle = "#ffffff"
+          if (arrow.hover) {
+            ctx.strokeStyle = '#ff0000'
+            ctx.fillStyle = "#ff0000"                        
+          } else {
+            ctx.strokeStyle = '#ffffff'
+            ctx.fillStyle = "#ffffff"            
+          }
         } else {
           ctx.strokeStyle = '#ffff00'
           ctx.fillStyle = "#ffff00"
